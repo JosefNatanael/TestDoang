@@ -31,11 +31,13 @@ label_output.pack()
 label_error = tk.Label(master=frame_a, text="")
 label_error.pack()
 
+
 def run_command(cmd):
-    print("command:", cmd)
-    output, error = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True).communicate()
+    output, error = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                     universal_newlines=True).communicate()
     label_output.config(text=output)
     label_error.config(text=error)
+
 
 # create a button to install requirements
 button = tk.Button(window, text=f"Run {' '.join(init_command)}", command=lambda: run_command(init_command))
@@ -43,9 +45,7 @@ button.pack()
 
 # create a button for each command
 for command in commands:
-    print("command1:", command)
     button = tk.Button(window, text=f"Run {' '.join(command)}", command=lambda x=command: run_command(x))
     button.pack()
-
 
 window.mainloop()
